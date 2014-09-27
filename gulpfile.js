@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+	jade = require('gulp-jade'),
 	sass = require('gulp-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
 	jshint = require('gulp-jshint'),
@@ -18,8 +19,7 @@ gulp.task('jade', function(){
 		.pipe(jade({
 			pretty: true
 		}))
-		.pipe(gulp.dest(path.pub + '/'))
-		.pipe(browserSync.reload());
+		.pipe(gulp.dest(path.pub + '/'));
 });
 
 gulp.task('css', function(){
@@ -66,7 +66,8 @@ gulp.task('browser-sync', function() {
     });
 });
 
-gulp.task('default', ['jade', 'css', 'js', 'vendorCSS', 'vendorJS', 'browserSync'], function(){
+gulp.task('default', ['jade', 'css', 'js', 'vendorCSS', 'vendorJS', 'browser-sync'], function(){
+	gulp.watch(path.app + '/**/*.jade', ['jade', browserSync.reload]);
 	gulp.watch(path.app + '/assets/scss/**/*.scss', ['css']);
 	gulp.watch(path.app + '/assets/js/script.js', ['js']);
 	gulp.watch(path.app + '/assets/vendor/**/*.js', ['vendorJS']);
