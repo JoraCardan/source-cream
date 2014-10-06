@@ -1,3 +1,3 @@
 $(window).load(function() {
-	console.log('Source Cream — you first template.');
+	console.log('Source Cream — your first template.');
 });
