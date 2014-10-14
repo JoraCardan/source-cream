@@ -31,7 +31,8 @@ gulp.task('css', function(){
 });
 
 gulp.task('js', function(){
-	return gulp.src(path.app + '/assets/js/scripts.js')
+	// Except jQuery.js file 
+	return gulp.src([path.app + '/assets/js/scripts.js', '!' + path.app + '/assets/vendor/js/jquery.js'])
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
 		.pipe(uglify())
