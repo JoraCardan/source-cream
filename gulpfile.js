@@ -35,6 +35,7 @@ gulp.task('js', function(){
 	return gulp.src(path.app + '/assets/js/scripts.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
+		.pipe(gulp.dest(path.pub + '/js/'))
 		.pipe(uglify())
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest(path.pub + '/js/'))
