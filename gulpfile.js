@@ -59,6 +59,10 @@ gulp.task('vendorCSS', function() {
 		.pipe(browserSync.reload({stream:true}));
 });
 
+gulp.task('browserReload', function() {
+	browserSync.reload();
+});
+
 gulp.task('browser-sync', function() {
     return browserSync({
     	server: {
@@ -68,7 +72,7 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('default', ['jade', 'css', 'js', 'vendorCSS', 'vendorJS', 'browser-sync'], function(){
-	gulp.watch(path.app + '/**/*.jade', ['jade', browserSync.reload]);
+	gulp.watch(path.app + '/**/*.jade', ['jade', 'browserReload']);
 	gulp.watch(path.app + '/assets/scss/**/*.scss', ['css']);
 	gulp.watch(path.app + '/assets/js/script.js', ['js']);
 	gulp.watch(path.app + '/assets/vendor/**/*.js', ['vendorJS']);
