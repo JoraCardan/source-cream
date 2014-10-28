@@ -32,7 +32,7 @@ gulp.task('css', function(){
 
 gulp.task('js', function(){
 	// Except jQuery.js file 
-	return gulp.src([path.app + '/assets/js/scripts.js', '!' + path.app + '/assets/vendor/js/jquery.js'])
+	return gulp.src(path.app + '/assets/js/scripts.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
 		.pipe(uglify())
@@ -42,7 +42,7 @@ gulp.task('js', function(){
 });
 
 gulp.task('vendorJS', function() {
-	return gulp.src(path.app + '/assets/vendor/**/*.js')
+	return gulp.src([path.app + '/assets/vendor/**/*.js', '!' + path.app + '/assets/vendor/js/jquery.js'])
 		.pipe(concat('vendor.js'))
 		.pipe(uglify())
 		.pipe(rename({suffix: '.min'}))
@@ -60,7 +60,7 @@ gulp.task('vendorCSS', function() {
 });
 
 gulp.task('browserReload', function() {
-	browserSync.reload();
+	return browserSync.reload();
 });
 
 gulp.task('browser-sync', function() {
@@ -71,10 +71,17 @@ gulp.task('browser-sync', function() {
     });
 });
 
+gulp.task('jqueryPrepare', function() {
+    return gulp.src(path.app + '/assets/vendor/js/jquery.js')
+    	.pipe(uglify())
+    	.pipe(rename({suffix: '.min'}))
+    	.pipe(gulp.dest(path.pub + '/js/'));
+});
+
 gulp.task('default', ['jade', 'css', 'js', 'vendorCSS', 'vendorJS', 'browser-sync'], function(){
 	gulp.watch(path.app + '/**/*.jade', ['jade', 'browserReload']);
 	gulp.watch(path.app + '/assets/scss/**/*.scss', ['css']);
-	gulp.watch(path.app + '/assets/js/script.js', ['js']);
+	gulp.watch(path.app + '/assets/js/scripts.js', ['js']);
 	gulp.watch(path.app + '/assets/vendor/**/*.js', ['vendorJS']);
 	gulp.watch(path.app + '/assets/vendor/**/*.css', ['vendorCSS']);
 });
