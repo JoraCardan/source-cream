@@ -1,4 +1,5 @@
-var gulp = require('gulp'),
+var 
+	gulp = require('gulp'),
 	jade = require('gulp-jade'),
 	sass = require('gulp-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
@@ -7,15 +8,27 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	concat = require('gulp-concat'),
 	minifyCSS = require('gulp-minify-css'),
-	browserSync = require('browser-sync');
+	gutil = require('gulp-util'),
+	plumber = require('gulp-plumber'),
+	browserSync = require('browser-sync')
+;
 
 var path = {
 	app : "./app",
 	pub : "./_public"
 };
 
+var plumberError = function (err) {
+    gutil.beep();
+    console.error(err.message);
+};
+
 gulp.task('jade', function(){
 	return gulp.src(path.app + '/*.jade')
+		.pipe(plumber(function (error) {
+			plumberError(error);
+			this.emit('end');
+		}))
 		.pipe(jade({
 			pretty: true
 		}))
@@ -24,6 +37,10 @@ gulp.task('jade', function(){
 
 gulp.task('css', function(){
 	return gulp.src(path.app + '/assets/scss/style.scss')
+		.pipe(plumber(function (error) {
+			plumberError(error);
+			this.emit('end');
+		}))
 		.pipe(sass())
 		.pipe(autoprefixer('last 4 version'))
 		.pipe(gulp.dest(path.pub + '/css/'))
@@ -33,6 +50,10 @@ gulp.task('css', function(){
 gulp.task('js', function(){
 	// Except jQuery.js file 
 	return gulp.src(path.app + '/assets/js/scripts.js')
+		.pipe(plumber(function (error) {
+			plumberError(error);
+			this.emit('end');
+		}))
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
 		.pipe(gulp.dest(path.pub + '/js/'))
