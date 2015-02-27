@@ -22,18 +22,18 @@
   },
   "homepage": "https://github.com/prBigBrother/source-cream",
   "devDependencies": {
-    "browser-sync": "^1.5.1",
-    "gulp": "^3.8.8",
-    "gulp-autoprefixer": "^1.0.1",
-    "gulp-concat": "^2.4.1",
-    "gulp-jade": "^0.8.0",
-    "gulp-jshint": "^1.8.4",
-    "gulp-minify-css": "^0.3.10",
+    "browser-sync": "^2.2.1",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-jade": "^1.0.0",
+    "gulp-jshint": "^1.9.2",
+    "gulp-minify-css": "^0.4.6",
     "gulp-plumber": "^0.6.6",
     "gulp-rename": "^1.2.0",
-    "gulp-sass": "^1.0.0",
-    "gulp-uglify": "^1.0.1",
-    "gulp-util": "^3.0.1",
-    "gutil": "^1.5.5"
+    "gulp-sass": "^1.3.3",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4",
+    "gutil": "^1.6.4"
   }
 }
